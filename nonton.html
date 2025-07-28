@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <script
+      async
+      custom-element="amp-auto-ads"
+      src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
+    ></script>
+    <meta charset="UTF-8" />
+    <title>Nonton YouTube Langsung</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        padding: 50px;
+      }
+      input {
+        width: 400px;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      iframe {
+        margin-top: 20px;
+        width: 640px;
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-9565554823368238">
+    </amp-auto-ads>
+    <h1>Nonton YouTube Langsung</h1>
+    <p>Masukkan URL video YouTube:</p>
+    <input
+      type="text"
+      id="youtubeUrl"
+      placeholder="https://www.youtube.com/watch?v=xxxxxx"
+    />
+    <br />
+    <button onclick="tampilkanVideo()">Tonton</button>
+
+    <div id="player"></div>
+
+    <script>
+      function tampilkanVideo() {
+        const url = document.getElementById("youtubeUrl").value;
+        const videoId = getVideoId(url);
+        if (videoId) {
+          const iframe = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+          document.getElementById("player").innerHTML = iframe;
+        } else {
+          alert("URL tidak valid.");
+        }
+      }
+
+      function getVideoId(url) {
+        const regExp = /(?:youtube\.com\/.*v=|youtu\.be\/)([^&\n?#]+)/;
+        const match = url.match(regExp);
+        return match ? match[1] : null;
+      }
+    </script>
+  </body>
+</html>
